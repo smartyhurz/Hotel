@@ -1,0 +1,137 @@
+{% load static %}
+{% include "header.html" %}
+   <!-- Main Dashboard Section -->
+   <section class="dashboard">
+       <div class="container">
+           <div class="row">
+               <!-- Sidebar -->
+               <div class="col-md-3">
+                   <div class="dashboard-sidebar">
+                       <h3>Dashboard</h3>
+                       <ul class="list-unstyled">
+                           <li><a href="/dashboard/">Overview</a></li>
+                           <li><a href="/dashboard/bookings/">My Bookings</a></li>
+                          <!-- <li><a href="/dashboard/profile/">Profile Settings</a></li>
+                           <li><a href="/dashboard/help/">Help & Support</a></li>-->
+                           <li><a href="/logout/">Log Out</a></li>
+                       </ul>
+                   </div>
+               </div>
+
+               <!-- Main Content -->
+               <div class="col-md-9">
+                   <div class="dashboard-content">
+                       <h2>Welcome, {{ user.username }}!</h2>
+                       <p>Here's an overview of your recent activities.</p>
+
+                       <!-- Recent Bookings -->
+                       <div class="recent-bookings">
+                           <h3>Recent Bookings</h3>
+                           <table class="table">
+                               <thead>
+                                   <tr>
+                                       <th>Booking ID</th>
+                                       <th>Room Type</th>
+                                       <th>Check-in</th>
+                                       <th>Check-out</th>
+                                       <th>Guest</th>
+                                   </tr>
+                               </thead>
+                               <tbody>
+                                   {% for booking in bookings %}
+                                   <tr>
+                                       <td>{{ booking.id }}</td>
+                                       <td>
+                                        <img src="{% static 'img/' %}{{ booking.room.image }}" alt="{{ booking.room.room_type }}" class="img-thumbnail" style="width: 100px;">
+                                        {{ booking.room.room_type }}
+                                       </td>
+                                       <td>{{ booking.check_in_date }}</td>
+                                       <td>{{ booking.check_out_date }}</td>
+                                       <td>{{ booking.guests }}</td>
+                                   </tr>
+                                   {% empty %}
+                                <tr>
+                                    <td colspan="5">No recent bookings found.</td>
+                                </tr>
+                                   {% endfor %}
+                               </tbody>
+                           </table>
+                       </div>
+
+                       <!-- Profile Information -->
+                       <div class="profile-info mt-4">
+                           <h3>Profile Information</h3>
+                           <p>Name: {{ user.username }}</p>
+                           <p>Email: {{ user.email }}</p>
+                          <!-- <a href="/dashboard/profile/" class="btn btn-primary">Edit Profile</a>-->
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </section>
+{% include "footer.html" %}   
+<style>
+    .dashboard {
+        padding: 20px 0;
+        margin-top: 100px;
+    }
+
+    .dashboard-sidebar {
+        background-color: rgba(255,255,255,0.07);
+        padding: 20px;
+        border-radius: 2px;
+    }
+
+    .dashboard-sidebar h3 {
+        margin-bottom: 20px;
+    }
+
+    .dashboard-sidebar ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .dashboard-sidebar ul li {
+        margin-bottom: 10px;
+    }
+
+    .dashboard-sidebar ul li a {
+        text-decoration: none;
+        color: #007bff;
+    }
+
+    .dashboard-content {
+        padding: 20px;
+        background-color: rgba(255,255,255,0.07);
+        border-radius: 2px;
+    }
+
+    .dashboard-content h2 {
+        margin-bottom: 20px;
+    }
+
+    .recent-bookings h3 {
+        margin-bottom: 15px;
+       
+    }
+
+    .recent-bookings .table {
+        margin-top: 15px;
+        background-color:#fff;
+    }
+
+    .profile-info {
+        margin-top: 30px;
+    }
+
+    .profile-info h3 {
+        margin-bottom: 15px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        color: #fff;
+    }
+</style>

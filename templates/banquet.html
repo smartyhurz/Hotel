@@ -1,0 +1,581 @@
+{% load static %}
+{% include "header.html" %}
+
+    <header class="header slider">
+        <div class="owl-carousel owl-theme">
+            <!-- The opacity on the image is made with "data-overlay-dark="number". You can change it using the numbers 0-9. -->
+            <div class="text-center item bg-img" data-overlay-dark="3" data-background={% static "img/restaurant/s1.avif" %}></div>
+            <div class="text-center item bg-img" data-overlay-dark="3" data-background={% static "img/restaurant/2.jpg" %}></div>
+            <div class="text-center item bg-img" data-overlay-dark="3" data-background={% static "img/restaurant/s2.avif" %}></div>
+        </div>
+        <!-- arrow down -->
+        <div class="arrow bounce text-center">
+            <a href="#" data-scroll-nav="1" class=""> <i class="ti-arrow-down"></i> </a>
+        </div>
+    </header>
+ 
+    <!--<section class="about section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-30 animate-box" data-animate-effect="fadeInUp">
+                    <span>
+                        <i class="star-rating"></i>
+                        <i class="star-rating"></i>
+                        <i class="star-rating"></i>
+                        <i class="star-rating"></i>
+                        <i class="star-rating"></i>
+                    </span>
+                    <div class="section-subtitle">Visom6 Luxury Hotel</div>
+                    <div class="section-title">Enjoy a Luxury Banquet Hall Experience</div>
+                    <p>E Hotel has 3 banquet halls that can accommodate anywhere from 25 to 600 people at a time, ensuring that you always have the perfect venue for your celebrations. All our halls come equipped with basic amenities such as Wi-fi, air-conditioning, and audio-visual equipment. Our attentive staff is always around to take care of any special requests you may have to help make your event a resounding success.</p>
+                    <!-- call -
+                    <div class="reservations">
+                        <div class="icon"><span class="flaticon-call"></span></div>
+                        <div class="text">
+                            <p>Reservation</p> <a href="tel:855-100-4444">76030 32300</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-md-3 animate-box" data-animate-effect="fadeInUp">
+                    <img src="img/rooms/8.jpg" alt="" class="mt-90 mb-30">
+                </div>
+                <div class="col col-md-3 animate-box" data-animate-effect="fadeInUp">
+                    <img src="img/rooms/2.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </section>-->
+
+
+    <!-- <div class="rooms3 section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="square-flip">
+                        <div class="square bg-img" data-background="img/restaurant/banq2.webp">
+                            <span class="category"><a href="book.html">Book</a></span>
+                            <div class="square-container d-flex align-items-end justify-content-end">
+                                <div class="box-title">
+                                    <h6>150$ / Night</h6>
+                                    <h4>PRIYAM</h4>
+                                </div>
+                            </div>
+                            <div class="flip-overlay"></div>
+                        </div>
+                        <div class="square2">
+                            <div class="square-container2">
+                                <h6>150$ / Night</h6>
+                                <h4>PRIYAM</h4>
+                                <p>The largest of the three indoor venues, Priyam spans over 15,000 sqft with its own Reception, Dining Hall and Kitchen. The decor is rooted in tradition while set against a modern backdrop, featuring carved reclaimed wood panels from Karaikudi and Rajasthani thikri work accentuated by premium italian marble flooring.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="square-flip">
+                        <div class="square bg-img" data-background="img/restaurant/banq1.webp">
+                            <span class="category"><a href="book.html">Book</a></span>
+                            <div class="square-container d-flex align-items-end justify-content-end">
+                                <div class="box-title">
+                                    <h6>200$ / Day</h6>
+                                    <h4>VARHAM</h4>
+                                </div>
+                            </div>
+                            <div class="flip-overlay"></div>
+                        </div>
+                        <div class="square2">
+                            <div class="square-container2">
+                                <h6>200$ / Day</h6>
+                                <h4>VARHAM</h4>
+                                <p>Varham, spread across 5,500 sqft, is a versatile venue that seamlessly blends culture and modernity making it suited to a wide variety of events. With elegant Italian flooring and a modern rendition of the auspicious Banana Leaf adorning the walls, the hall has a seating capacity of 300 people.</p>
+                               <!-- <div class="row room-facilities mb-30">
+                                    <div class="col-md-6">
+                                        <ul>
+                                            <li><i class="flaticon-group"></i> 1-2 Persons</li>
+                                            <li><i class="flaticon-wifi"></i> Free Wifi</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <ul> 
+                                           <li><i class="flaticon-bed"></i> Twin Bed</li>
+                                           <li><i class="flaticon-breakfast"></i> Breakfast</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="btn-line"><a href="book.html">Book Now</a></div>-
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="square-flip">
+                        <div class="square bg-img" data-background="img/restaurant/banq3.webp">
+                            <span class="category"><a href="book.html">Book</a></span>
+                            <div class="square-container d-flex align-items-end justify-content-end">
+                                <div class="box-title">
+                                    <h6>250$ / Night</h6>
+                                    <h4>SHIVAM</h4>
+                                </div>
+                            </div>
+                            <div class="flip-overlay"></div>
+                        </div>
+                        <div class="square2">
+                            <div class="square-container2">
+                                <h6>250$ / Night</h6>
+                                <h4>SHIVAM</h4>
+                                <p>Shivam is stylish and classy. It has been designed with luxurious finishings, mosaic mirror walls and has an uninterrupted carpeted space of 4,000 sqft perfect for all types of events. It has a seating capacity of 200 people.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="square-flip">
+                        <div class="square bg-img" data-background="img/restaurant/banq4.webp">
+                            <span class="category"><a href="book.html">Book</a></span>
+                            <div class="square-container d-flex align-items-end justify-content-end">
+                                <div class="box-title">
+                                    <h6>300$ / Day</h6>
+                                    <h4>AMAZONITE</h4>
+                                </div>
+                            </div>
+                            <div class="flip-overlay"></div>
+                        </div>
+                        <div class="square2">
+                            <div class="square-container2">
+                                <h6>300$ / Day</h6>
+                                <h4>AMAZONITE</h4>
+                                <p>A large rooftop outdoor venue, Amazonite occupies 17,000 sqft of the roof. It has its own reception desk, storage room, bank of toilets and most importantly, the best location for golden hour pictures. It is a fully independent green oasis in the city. </p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              <!--  <div class="col-md-4">
+                    <div class="square-flip">
+                        <div class="square bg-img" data-background="img/rooms/8.jpg">
+                            <span class="category"><a href="rooms2.html">Book</a></span>
+                            <div class="square-container d-flex align-items-end justify-content-end">
+                                <div class="box-title">
+                                    <h6>350$ / Night</h6>
+                                    <h4>Superior Room</h4>
+                                </div>
+                            </div>
+                            <div class="flip-overlay"></div>
+                        </div>
+                        <div class="square2">
+                            <div class="square-container2">
+                                <h6>350$ / Night</h6>
+                                <h4>Superior Room</h4>
+                                <p>Hotel viverra tristique ustoni miss vitae sediam neque nivamus aestan.</p>
+                                <div class="row room-facilities mb-30">
+                                    <div class="col-md-6">
+                                        <ul>
+                                            <li><i class="flaticon-group"></i> 1-2 Persons</li>
+                                            <li><i class="flaticon-wifi"></i> Free Wifi</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <ul> 
+                                           <li><i class="flaticon-bed"></i> Twin Bed</li>
+                                           <li><i class="flaticon-breakfast"></i> Breakfast</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="btn-line"><a href="book.html">Book Now</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="square-flip">
+                        <div class="square bg-img" data-background="img/rooms/9.jpg">
+                            <span class="category"><a href="rooms2.html">Book</a></span>
+                            <div class="square-container d-flex align-items-end justify-content-end">
+                                <div class="box-title">
+                                    <h6>400$ / Night</h6>
+                                    <h4>Wellness Room</h4>
+                                </div>
+                            </div>
+                            <div class="flip-overlay"></div>
+                        </div>
+                        <div class="square2">
+                            <div class="square-container2">
+                                <h6>400$ / Night</h6>
+                                <h4>Wellness Room</h4>
+                                <p>Hotel viverra tristique ustoni miss vitae sediam neque nivamus aestan.</p>
+                                <div class="row room-facilities mb-30">
+                                    <div class="col-md-6">
+                                        <ul>
+                                            <li><i class="flaticon-group"></i> 1-2 Persons</li>
+                                            <li><i class="flaticon-wifi"></i> Free Wifi</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <ul> 
+                                           <li><i class="flaticon-bed"></i> Twin Bed</li>
+                                           <li><i class="flaticon-breakfast"></i> Breakfast</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="btn-line"><a href="book.html">Book Now</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-
+            </div>
+        </div>
+    
+    </div>-->
+
+
+    
+    <section class="rooms1 section-padding bg-darkblack" data-scroll-index="1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-subtitle">Visom6 Luxury Hotel</div>
+                    <div class="section-title">Banquet Halls</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="position-re o-hidden"> <img src={% static "img/restaurant/bday.jpg" %} alt=""> </div> <span class="category"><a href="/book/">Book</a></span>
+                        <div class="con">
+                            <h6><a href="book.html">150$ / Night</a></h6>
+                            <h5><a href="book.html">Birthday Celebration</a> </h5>
+                            <div class="line"></div>
+                            <div class="row facilities">
+                                <div class="col col-md-7">
+                                    <ul>
+                                        <li><i class="flaticon-bed"></i></li>
+                                        <li><i class="flaticon-bath"></i></li>
+                                        <li><i class="flaticon-breakfast"></i></li>
+                                        <li><i class="flaticon-towel"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="col col-md-5 text-end">
+                                    <!--<div class="permalink"><a href="room-details.html">Details <i class="ti-arrow-right"></i></a></div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="position-re o-hidden"> <img src={% static "img/restaurant/hall2.webp" %} alt=""> </div> <span class="category"><a href="/book/">Book</a></span>
+                        <div class="con">
+                            <h6><a href="book.html">200$ / Night</a></h6>
+                            <h5><a href="book.html">Family Celebration</a></h5>
+                            <div class="line"></div>
+                            <div class="row facilities">
+                                <div class="col col-md-7">
+                                    <ul>
+                                        <li><i class="flaticon-bed"></i></li>
+                                        <li><i class="flaticon-bath"></i></li>
+                                        <li><i class="flaticon-breakfast"></i></li>
+                                        <li><i class="flaticon-towel"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="col col-md-5 text-end">
+                                    <!--<div class="permalink"><a href="room-details.html">Details <i class="ti-arrow-right"></i></a></div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="position-re o-hidden"> <img src={% static "img/restaurant/hall3.webp" %} alt=""> </div> <span class="category"><a href="/book/l">Book</a></span>
+                        <div class="con">
+                            <h6><a href="book.html">250$ / Night</a></h6>
+                            <h5><a href="book.html">Office Conference</a></h5>
+                            <div class="line"></div>
+                            <div class="row facilities">
+                                <div class="col col-md-7">
+                                    <ul>
+                                        <li><i class="flaticon-bed"></i></li>
+                                        <li><i class="flaticon-bath"></i></li>
+                                        <li><i class="flaticon-breakfast"></i></li>
+                                        <li><i class="flaticon-towel"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="col col-md-5 text-end">
+                                    <!--<div class="permalink"><a href="room-details.html">Details <i class="ti-arrow-right"></i></a></div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="item">
+                        <div class="position-re o-hidden"> <img src={% static "img/restaurant/hall4.webp" %} alt=""> </div> <span class="category"><a href="/book/">Book</a></span>
+                        <div class="con">
+                            <h6><a href="book.html">300$ / Night</a></h6>
+                            <h5><a href="book.html">Social Gathering</a></h5>
+                            <div class="line"></div>
+                            <div class="row facilities">
+                                <div class="col col-md-7">
+                                    <ul>
+                                        <li><i class="flaticon-bed"></i></li>
+                                        <li><i class="flaticon-bath"></i></li>
+                                        <li><i class="flaticon-breakfast"></i></li>
+                                        <li><i class="flaticon-towel"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="col col-md-5 text-end">
+                                    <!--<div class="permalink"><a href="room-details.html">Details <i class="ti-arrow-right"></i></a></div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="item">
+                        <div class="position-re o-hidden"> <img src={% static "img/restaurant/hall1.jpeg" %} alt=""> </div> <span class="category"><a href="/book/">Book</a></span>
+                        <div class="con">
+                            <h6><a href="book.html">150$ / Night</a></h6>
+                            <h5><a href="book.html">Wedding Celebration</a></h5>
+                            <div class="line"></div>
+                            <div class="row facilities">
+                                <div class="col col-md-7">
+                                    <ul>
+                                        <li><i class="flaticon-bed"></i></li>
+                                        <li><i class="flaticon-bath"></i></li>
+                                        <li><i class="flaticon-breakfast"></i></li>
+                                        <li><i class="flaticon-towel"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="col col-md-5 text-end">
+                                    <!--<div class="permalink"><a href="room-details.html">Details <i class="ti-arrow-right"></i></a></div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="rooms1 section-padding bg-darkblack" data-scroll-index="1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-subtitle">Visom6 Luxury Hotel</div>
+                    <div class="section-title">Banquet Halls</div>
+                </div>
+            </div>
+            <div class="row">
+                {% for hall in halls %}
+                    <div class="{% if forloop.counter == 4 or forloop.counter == 5 %}col-md-6{% else %}col-md-4{% endif %}">
+                        <div class="item">
+                            <div class="position-re o-hidden">
+                                <img src="{{ hall.image.url }}" alt="">
+                            </div>
+                            <span class="category"><a href="{% url 'booking_hall' hall.id %}">Book</a></span>
+                            <div class="con">
+                                <h6><a href="{% url 'booking_hall' hall.id %}">${{ hall.price_per_night }} / Night</a></h6>
+                                <h5><a href="{% url 'booking_hall' hall.id %}">{{ hall.get_hall_type_display }}</a></h5>
+                                <div class="line"></div>
+                                <div class="row facilities">
+                                    <div class="col col-md-7">
+                                        <ul>
+                                            <li><i class="flaticon-bed"></i></li>
+                                            <li><i class="flaticon-bath"></i></li>
+                                            <li><i class="flaticon-breakfast"></i></li>
+                                            <li><i class="flaticon-towel"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col col-md-5 text-end">
+                                        <!-- Uncomment if you want to add a permalink -->
+                                        <!-- <div class="permalink"><a href="room-details.html">Details <i class="ti-arrow-right"></i></a></div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    
+    <section class="facilties section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-subtitle">Our Services</div>
+                    <div class="section-title">Banquet Hall Facilities</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="single-facility animate-box" data-animate-effect="fadeInUp">
+                        <span class="flaticon-world"></span>
+                        <h5>Generator Backup</h5>
+                        <p>We’ll pick up from airport while you comfy on your ride, mus nellentesque habitant.</p>
+                        <div class="facility-shape"> <span class="flaticon-world"></span> </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="single-facility animate-box" data-animate-effect="fadeInUp">
+                        <span class="flaticon-car"></span>
+                        <h5>Parking Space</h5>
+                        <p>Fusce tincidunt nis ace park norttito sit amet space, mus nellentesque habitant.</p>
+                        <div class="facility-shape"> <span class="flaticon-car"></span> </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="single-facility animate-box" data-animate-effect="fadeInUp">
+                        <span class="flaticon-bed"></span>
+                        <h5>luxurious Restroom</h5>
+                        <p>Room tincidunt nis ace park norttito sit amet space, mus nellentesque habitant.</p>
+                        <div class="facility-shape"> <span class="flaticon-bed"></span> </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="single-facility animate-box" data-animate-effect="fadeInUp">
+                        <span class="flaticon-swimming"></span>
+                        <h5>Swimming Pool</h5>
+                        <p>Swimming pool tincidunt nise ace park norttito sit space, mus nellentesque habitant.</p>
+                        <div class="facility-shape"> <span class="flaticon-swimming"></span> </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="single-facility animate-box" data-animate-effect="fadeInUp">
+                        <span class="flaticon-wifi"></span>
+                        <h5>Fibre Internet</h5>
+                        <p>Wifi tincidunt nis ace park norttito sit amet space, mus nellentesque habitant.</p>
+                        <div class="facility-shape"> <span class="flaticon-wifi"></span> </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="single-facility animate-box" data-animate-effect="fadeInUp">
+                        <span class="flaticon-breakfast"></span>
+                        <h5>Unlimited Foods</h5>
+                        <p>Eat tincidunt nisa ace park norttito sit amet space, mus nellentesque habitant</p>
+                        <div class="facility-shape"> <span class="flaticon-breakfast"></span> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+   
+    <section class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-subtitle">Banquet Hall</div>
+                    <div class="section-title">Gallery</div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 gallery-item">
+                    <a href={% static "img/restaurant/hall1.jpeg" %} title="" class="img-zoom">
+                        <div class="gallery-box">
+                            <div class="gallery-img">
+                                <img src={% static "img/restaurant/hall1.jpeg" %} class="img-fluid mx-auto d-block" alt="work-img">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 gallery-item">
+                    <a href={% static "img/restaurant/hall2.webp" %} title="" class="img-zoom">
+                        <div class="gallery-box">
+                            <div class="gallery-img">
+                                <img src={% static "img/restaurant/hall2.webp" %} class="img-fluid mx-auto d-block" alt="work-img">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 gallery-item">
+                    <a href={% static "img/restaurant/hall3.webp" %} title="" class="img-zoom">
+                        <div class="gallery-box">
+                            <div class="gallery-img">
+                                <img src={% static "img/restaurant/hall3.webp" %} class="img-fluid mx-auto d-block" alt="work-img">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 gallery-item">
+                    <a href={% static "img/restaurant/hall4.webp" %} title="" class="img-zoom">
+                        <div class="gallery-box">
+                            <div class="gallery-img">
+                                <img src={% static "img/restaurant/hall4.webp" %} class="img-fluid mx-auto d-block" alt="work-img">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 gallery-item">
+                    <a href={% static "img/restaurant/hall6.jpg" %} title="" class="img-zoom">
+                        <div class="gallery-box">
+                            <div class="gallery-img">
+                                <img src={% static "img/restaurant/hall6.jpg" %} class="img-fluid mx-auto d-block" alt="work-img">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 gallery-item">
+                    <a href={% static "img/restaurant/garden.webp" %} title="" class="img-zoom">
+                        <div class="gallery-box">
+                            <div class="gallery-img">
+                                <img src={% static "img/restaurant/garden.webp" %} class="img-fluid mx-auto d-block" alt="work-img">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+     <!-- Testiominals -->
+     <section class="testimonials">
+        <div class="background bg-img bg-fixed section-padding pb-0" data-background={% static "img/slider/2.jpg" %} data-overlay-dark="3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        <div class="testimonials-box">
+                            <div class="head-box">
+                                <h6>Testimonials</h6>
+                                <h4>What Client's Say?</h4>
+                                <div class="line"></div>
+                            </div>
+                            <div class="owl-carousel owl-theme">
+                                <div class="item"> <span class="quote"><img src={% static "img/quot.png" %} alt=""></span>
+                                    <p>Hotel dapibus asue metus the nec feusiate eraten miss hendreri net ve ante the lemon sanleo nectan feugiat erat hendrerit necuis ve ante otel inilla duiman at finibus viverra neca the sene on satien the miss drana inc fermen norttito sit space, mus nellentesque habitan.</p>
+                                    <div class="info">
+                                        <div class="author-img"> <img src={% static "img/team/4.jpg" %} alt=""> </div>
+                                        <div class="cont"> <span><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i></span>
+                                            <h6>Emily Brown</h6> <span>Guest review</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item"> <span class="quote"><img src={% static "img/quot.png" %} alt=""></span>
+                                    <p>Hotel dapibus asue metus the nec feusiate eraten miss hendreri net ve ante the lemon sanleo nectan feugiat erat hendrerit necuis ve ante otel inilla duiman at finibus viverra neca the sene on satien the miss drana inc fermen norttito sit space, mus nellentesque habitan.</p>
+                                    <div class="info">
+                                        <div class="author-img"> <img src={% static "img/team/1.jpg" %} alt=""> </div>
+                                        <div class="cont"> <span><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i></span>
+                                            <h6>Nolan White</h6> <span>Guest review</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item"> <span class="quote"><img src={% static "img/quot.png" %} alt=""></span>
+                                    <p>Hotel dapibus asue metus the nec feusiate eraten miss hendreri net ve ante the lemon sanleo nectan feugiat erat hendrerit necuis ve ante otel inilla duiman at finibus viverra neca the sene on satien the miss drana inc fermen norttito sit space, mus nellentesque habitan.</p>
+                                    <div class="info">
+                                        <div class="author-img"> <img src={% static "img/team/5.jpg" %} alt=""> </div>
+                                        <div class="cont"> <span><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i></span>
+                                            <h6>Olivia Martin</h6> <span>Guest review</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+   
+    
+    <!-- Footer -->
+{% include "footer.html" %}   

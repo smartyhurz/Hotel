@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Visom6 Luxury Hotel</title>
+    <link rel="shortcut icon" href="{% static 'img/logi.png' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow&family=Barlow+Condensed&family=Gilda+Display&display=swap">
+    <link rel="stylesheet" href="{% static 'css/plugins.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body {
+            background-image: url("{% static 'img/rooms/7.jpg' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+    </style>
+
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader-bg"></div>
+    <div id="preloader">
+        <div id="preloader-status">
+            <div class="preloader-position loader"> <span></span> </div>
+        </div>
+    </div>
+    
+    <!-- Header Banner -->
+
+    <!-- signup Form -->
+    <section>
+        <div class="col-md-5 mt-5 mx-auto shadow">
+            <div class="booking-box">
+                <div class="head-box">
+                    <h6 style="text-align: center;">Welcome to Visom6 Luxury Hotel</h6><hr>
+                    <center><h1 style="font-family: 'Times New Roman', Times, serif;">Sign Up</h1></center>
+                </div>
+                <div class="booking-inner clearfix">
+                    {% if errmsg %}
+
+                    <div class ="alert  alert-danger">{{errmsg}}</div>
+                    {% endif %}
+
+                    {% if success %}
+
+                    <div class ="alert  alert-success">{{success}}</div>
+                    {% endif %}
+                    <form method="POST" action="" class="form1 clearfix">
+                       {% csrf_token %}
+
+                        <div class="row mt-5">
+                            <div class="col-md-12">
+                                <div class="input1_wrapper">
+                                    <label>Name</label>
+                                    <div class="input1_inner">
+                                        <input type="text" name="uname" class="form-control input text" placeholder="Enter your name">
+                                    </div>
+                                </div>
+                            </div><hr>
+                            <div class="col-md-12">
+                                <div class="input1_wrapper">
+                                    <label>Email</label>
+                                    <div class="input1_inner">
+                                        <input type="email" name="uemail" class="form-control input text" placeholder="Enter the Email">
+                                    </div>
+                                </div>
+                            </div><hr>
+                            <div class="col-md-12">
+                                <div class="input1_wrapper">
+                                    <label>Password</label>
+                                    <div class="input1_inner">
+                                        <input type="password" name="upass" class="form-control input text" placeholder="Enter the Password">
+                                    </div>
+                                </div>
+                            </div><hr>
+                            <div class="col-md-12">
+                                <div class="input1_wrapper">
+                                    <label>Confirm Password</label>
+                                    <div class="input1_inner">
+                                        <input type="password" name="ucpass" class="form-control input text" placeholder="Confirm Password">
+                                    </div>
+                                </div>
+                            </div><hr>
+                          <center><div class="col-md-6">
+                                <button type="submit" class="btn-form1-submit mt-15">Submit</button>
+                            </div></center>
+                            <div><br>
+                            <p style="color: aliceblue;">Already Registered User? </p>&nbsp;&nbsp;<a href="/login/"> Click Here</a>
+                           </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section><br><br><br><br><br><br><br><br>
+
+    <!-- jQuery -->
+    <script src="{% static 'js/jquery-3.6.3.min.js' %}"></script>
+ <script src="{% static 'js/jquery-migrate-3.0.0.min.js' %}"></script>
+ <script src="{% static 'js/modernizr-2.6.2.min.js' %}"></script>
+ <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+ <script src="{% static 'js/jquery.isotope.v3.0.2.js' %}"></script>
+ <script src="{% static 'js/pace.js' %}"></script>
+ <script src="{% static 'js/popper.min.js' %}"></script>
+ <script src="{% static 'js/bootstrap.min.js' %}"></script>
+ <script src="{% static 'js/scrollIt.min.js' %}"></script>
+ <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+ <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+ <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+ <script src="{% static 'js/jquery.magnific-popup.js' %}"></script>
+ <script src="{% static 'js/YouTubePopUp.js' %}"></script>
+ <script src="{% static 'js/select2.js' %}"></script>
+ <script src="{% static 'js/datepicker.js' %}"></script>
+ <script src="{% static 'js/smooth-scroll.min.js' %}"></script>
+ <script src="{% static 'js/custom.js' %}"></script>
+</body>
+</html>
