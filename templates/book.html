@@ -192,25 +192,19 @@
                                     <div class="input1_wrapper">
                                         <label>Check out</label>
                                         <div class="input1_inner">
-                                            <input type="text" name="check_out_date" class="form-control input datepicker" placeholder="Check out" required>
+                                            <input type="text" class="form-control input datepicker hasDatepicker" name="check_out_date" placeholder="Check out" id="dp1725304925103" required>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
+                                </div><hr>
+                                <div class="col-md-12">
                                     <div class="select1_wrapper">
-                                        <label>Adults</label>
-                                        <div class="select1_inner">
-                                            <select name="adults" class="select2 select" style="width: 100%" required>
-                                                <option value="0">Adults</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                            </select>
+                                        <label for="adults">Adults</label>
+                                        <div class="input1_inner">
+                                            <input type="number" name="adults" id="adults" class="select2 select" style="width: 100%" required placeholder="Enter number of Persons">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                               <!-- <div class="col-md-6">
                                     <div class="select1_wrapper">
                                         <label>Children</label>
                                         <div class="select1_inner">
@@ -223,52 +217,18 @@
                                             </select>
                                         </div>
                                     </div>
-                                </div><br><br><br><br>
+                                </div>--><br><br><br><br>
                                 <div class="col-md-12">
                                     <button type="submit" class="btn-form1-submit mt-15">Book Now</button>
                                 </div>
                             </div>
-                            <input type="hidden" name="room_id" value="{% if room %}{{ room.id }}{% else %}''{% endif %}">
-                            <input type="hidden" name="hall_id" value="{% if hall %}{{ hall.id }}{% else %}''{% endif %}">
+                            <input type="hidden" name="room_id" value="{% if room %}{{ room.id }}{% endif %}">
+                            <input type="hidden" name="hall_id" value="{% if hall %}{{ hall.id }}{% endif %}">
                         </form>
                     </div>
                 </div>
             </div>
         </center>
     </section>
-    <br><br><br><br><br><br><br><br>
-    
-    
-    
-    
-    <!-- Clients 
-    <section class="clients">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-7">
-                <div class="owl-carousel owl-theme">
-                    <div class="clients-logo">
-                        <a href="#0"><img src="img/clients/1.png" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="img/clients/2.png" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="img/clients/3.png" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="img/clients/4.png" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="img/clients/5.png" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="img/clients/6.png" alt=""></a>
-                    </div>
-                </div>
-                </div>
-            </div>
-        </div>
-    </section>-->
-    <!-- Footer -->
-{% include "footer.html" %}       
+    <br><br><br><br><br>
+{% include "footer.html" %}  

@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 class Room(models.Model):
     ROOM_TYPES = [
@@ -45,11 +45,24 @@ class Hall(models.Model):
 
 class Booking(models.Model):
     customer_name = models.CharField(max_length=100)
-    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE,blank=True, null=True)
     hall = models.ForeignKey(Hall, on_delete=models.CASCADE, blank=True, null=True)
     check_in_date = models.DateField()
     check_out_date = models.DateField()
     guests = models.IntegerField()
+    price = models.DecimalField(max_digits=8, decimal_places=2, editable=False,default=0.00)
+
+    def save(self, *args, **kwargs):
+        # Calculate the number of days
+        days = (self.check_out_date - self.check_in_date).days
+
+        # Calculate total price based on room or hall
+        if self.room:
+            self.price = days * self.room.price_per_night
+        elif self.hall:
+            self.price = days * self.hall.price_per_night
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
         if self.room:
@@ -76,3 +89,16 @@ class NewsPost(models.Model):
 
     def __str__(self):
         return self.title
+    
+    
+    
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='profile_pics', default='default.jpg')
+    job_title = models.CharField(max_length=100, blank=True)
+    bio = models.TextField(blank=True)
+    mobile = models.CharField(max_length=15, blank=True)
+    location = models.CharField(max_length=100, blank=True)    
+    
+    def __str__(self):
+      return f'{self.user.username} Profile'

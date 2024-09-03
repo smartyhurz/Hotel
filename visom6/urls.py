@@ -28,7 +28,26 @@ urlpatterns = [
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='password_reset_confirm.html'), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'), name='password_reset_complete'),
     path('dashboard/',views.dashboard_view),
-    path('sign/',views.sig),
+    path('superuser-login/', views.superuser_login, name='superuser_login'),
+    path('sigu/',views.sigu),
+    path('superuser-login/addash/',views.dash),
+    path('accounts/login/', auth_views.LoginView.as_view(template_name='admin/sign-in.html'), name='login'),
+    path('profile/',views.profile),
+    path('tables/',views.tables,name='userf'),
+    path('edit/<int:user_id>/', views.edit_user, name='edit'),
+    
+    
+    path('bookin/', views.booking_list, name='booking_list'),
+
+    # Update an existing booking
+    path('bookin/<int:booking_id>/edit/', views.edit_booking, name='booking_update'),
+
+    # Delete a booking
+   
+    path('delete/<str:item_type>/<int:item_id>/', views.delete_user, name='booking_delete'),
+    
+    path('roomhall/',views.rooomhall,name='roomhall'),
+    path('edit/<str:item_type>/<int:item_id>/', views.edit_item, name='edit_item'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

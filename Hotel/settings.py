@@ -55,7 +55,9 @@ EMAIL_HOST_PASSWORD = '11111'
 DEFAULT_FROM_EMAIL = 'Visom6 Luxury Hotel <xyz@gmail.com>'
 
 
-
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
