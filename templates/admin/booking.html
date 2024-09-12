@@ -39,7 +39,7 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white active bg-gradient-primary" href="/superuser-login/addash/">
+          <a class="nav-link text-white" href="/superuser-login/addash/">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
@@ -55,7 +55,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="/bookin/">
+          <a class="nav-link text-white active bg-gradient-primary" href="/bookin/">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">receipt_long</i>
             </div>
@@ -297,6 +297,78 @@
             </div>
         </div>
     </div>
+
+
+    <div class="row">
+      <div class="col-12">
+          <div class="card my-4">
+              <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                  <div class="bg-gradient-white shadow-dark border-radius-lg pt-5 pb-2 d-flex justify-content-between">
+                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                      <input type="radio" class="btn-check" name="btnradio" id="allRooms" autocomplete="off" checked>
+                      <label class="btn btn-danger" for="allRooms" onclick="window.location.href='?filter=all'">All Rooms ({{ total_rooms }})</label>
+                  
+                      <input type="radio" class="btn-check" name="btnradio" id="availableRooms" autocomplete="off">
+                      <label class="btn btn-outline-primary" for="availableRooms" onclick="window.location.href='?filter=available'">Available Rooms ({{ available_rooms }})</label>
+                  
+                      <input type="radio" class="btn-check" name="btnradio" id="bookedRooms" autocomplete="off">
+                      <label class="btn btn-outline-primary" for="bookedRooms" onclick="window.location.href='?filter=booked'">Booked Rooms ({{ booked_rooms }})</label>
+                      <form method="post" action="{% url 'reset_booked_rooms' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Reset Booked Rooms</button>
+                    </form>
+                    
+                  </div>
+                  
+                      <!-- Filter dropdown for room availability -->
+            
+                  </div>
+              </div>
+      
+
+
+
+              <div class="card-body px-0 pb-2">
+                  <div class="table-responsive p-0">
+                      <table class="table align-items-center mb-0">
+                          <thead>
+                              <tr>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer Name</th>
+                                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Room Type</th>
+                                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Price</th>
+                                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Max  Persons</th>
+                                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total Rooms</th>
+                                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Booked Rooms</th>
+                                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Available Rooms</th>
+                                  <th class="text-secondary opacity-7"></th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            {% for room in rooms %}
+                            <tr>
+                              <td>
+                                {% for booking in bookings %}
+                                  {% if booking.room == room %}
+                                    {{ booking.customer_name }}
+                                 {% endif %}
+                               {% endfor %}
+                              </td>
+                              <td>{{ room.get_room_type_display }}</td>
+                              <td>${{ room.price_per_night }}</td>
+                              <td>{{ room.max_persons }}</td>
+                              <td>{{ room.total_rooms }}</td>
+                              <td>{{ room.booked_rooms }}</td>
+                              <td>{{ room.available_rooms }}</td>
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  
     
 
 

@@ -7,6 +7,8 @@ from django.contrib import messages
 from .models import Room,Hall,Booking,NewsPost
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from django.utils.timezone import now
+from django.db.models import Sum
 # Create your views here.
 
 @login_required
@@ -108,8 +110,8 @@ def booking_view(request, room_id=None, hall_id=None):
         if not room and not hall:
           return render(request, 'book.html', {'error': 'Invalid room or hall ID.'})        
         # Convert dates from string to date object
-        check_in_date = timezone.datetime.strptime(check_in_date, '%m/%d/%Y').date()
-        check_out_date = timezone.datetime.strptime(check_out_date, '%m/%d/%Y').date()
+        check_in_date = timezone.datetime.strptime(check_in_date, '%Y-%m-%d').date()
+        check_out_date = timezone.datetime.strptime(check_out_date, '%Y-%m-%d').date()
 
         # Create the Booking
         Booking.objects.create(
@@ -144,6 +146,7 @@ def booking_view(request, room_id=None, hall_id=None):
 
 def club(request):
     return render(request,"club.html")
+
 
 def contact(request):
     return render(request,"contact.html")
@@ -184,7 +187,7 @@ def register(request):
       u.set_password(password) #hashing the password
       u.save()
       context['success']="Succesfully Registered"
-      return render(request,'signup.html',context)
+      return redirect('/login/',context)
   else: 
      return render(request,'signup.html',context)
  
@@ -223,7 +226,7 @@ def check_rooms(request):
 
         # Validate the data as needed
         if not (check_in and check_out and persons and room_type and rooms):
-            return HttpResponse("Please fill all fields.", status=400)
+            return render(request, 'index.html')
 
         # Check room availability
         available_rooms = check_room_availability(check_in, check_out, room_type, rooms)
@@ -281,13 +284,14 @@ def superuser_login(request):
 
 def dash(request):
     today = now().date()
+    
     todays_users_count = User.objects.filter(date_joined__date=today).count()
     todays_money = Booking.objects.filter(check_in_date=today).aggregate(total=Sum('price'))['total']
     total_users = User.objects.count()
     total_sales = Booking.objects.aggregate(total=Sum('price'))['total'] or 0
     rooms = Room.objects.all()
     halls = Hall.objects.all()
-    bookings = Booking.objects.all().order_by('-check_in_date') 
+    bookings = Booking.objects.all().order_by('check_in_date') 
     context = {
         'todays_users_count': todays_users_count,
         'todays_money': todays_money if todays_money else 0,
@@ -361,7 +365,38 @@ def delete_user(request, item_type, item_id):
 
 def booking_list(request):
     bookings = Booking.objects.all()
-    return render(request, 'admin/booking.html', {'bookings': bookings})
+    filter_type = request.GET.get('filter', 'all')  # Default to 'all' if no filter is selected
+
+    rooms = Room.objects.all()
+    bookings = Booking.objects.select_related('room')
+    total_rooms = rooms.count()
+    available_rooms = [room for room in rooms if room.available_rooms > 0]
+    booked_rooms = [room for room in rooms if room.booked_rooms > 0]
+
+    if filter_type == 'available':
+        filtered_rooms = available_rooms
+    elif filter_type == 'booked':
+        filtered_rooms = booked_rooms
+    else:
+        filtered_rooms = rooms
+
+    context = {
+        'rooms': filtered_rooms,
+        'total_rooms': total_rooms,
+        'bookings': bookings,
+        'available_rooms': len(available_rooms),
+        'booked_rooms': len(booked_rooms),
+        'bookings': bookings,
+    }
+    return render(request, 'admin/booking.html',context)
+
+def reset_booked_rooms(request):
+    rooms = Room.objects.all()
+    for room in rooms:
+        room.booked_rooms = 0
+        room.save()
+    messages.success(request, 'Successfully reset booked rooms for all rooms.')
+    return redirect('booking_list')  # Redirect to any view after resetting
 
 
 def edit_booking(request, booking_id):
@@ -379,6 +414,8 @@ def edit_booking(request, booking_id):
         booking.guests = request.POST.get('number_of_guests')
         booking.price = request.POST.get('price')
         
+        booking.guests = int(request.POST.get('number_of_guests'))
+        booking.price = float(request.POST.get('price'))
         
          # Assuming the date format from the form is 'mm/dd/yyyy'
         booking.check_in_date = timezone.datetime.strptime(check_in_date1, '%m-%d-%Y').date()

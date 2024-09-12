@@ -38,7 +38,7 @@
                             </div> 
                             <span class="category"><a href="{% url 'room_detail' room.id %}">Book</a></span>
                             <div class="con">
-                                <h6><a href="{% url 'room_detail' room.id %}">${{ room.price_per_night }} / Night</a></h6>
+                                <h6><a href="{% url 'room_detail' room.id %}">₹{{ room.price_per_night }} / Night</a></h6>
                                 <h5><a href="{% url 'room_detail' room.id %}">{{ room.get_room_type_display }}</a></h5>
                                 <div class="line"></div>
                                 <div class="row facilities">
@@ -66,7 +66,7 @@
                             </div> 
                             <span class="category"><a href="{% url 'room_detail' room.id %}">Book</a></span>
                             <div class="con">
-                                <h6><a href="{% url 'room_detail' room.id %}">${{ room.price_per_night }} / Night</a></h6>
+                                <h6><a href="{% url 'room_detail' room.id %}">₹{{ room.price_per_night }} / Night</a></h6>
                                 <h5><a href="{% url 'room_detail' room.id %}">{{ room.get_room_type_display }}</a></h5>
                                 <div class="line"></div>
                                 <div class="row facilities">

@@ -12,10 +12,10 @@ urlpatterns = [
     path('banquet/',views.banquet),
     path('club/',views.club),
     path('contact/',views.contact),
-    path('login/',views.user_login,name='login'),
+    path('login/',views.user_login),
     path('news/',views.news_list),
     path('restuarant/',views.rest),  
-    path('rooms/',views.rooms),
+    path('rooms/',views.rooms,name='rooms'),
     path('signup/',views.register),
     path('spa/',views.spa),
     path('check-rooms/', views.check_rooms, name='check_rooms'),
@@ -35,7 +35,7 @@ urlpatterns = [
     path('profile/',views.profile),
     path('tables/',views.tables,name='userf'),
     path('edit/<int:user_id>/', views.edit_user, name='edit'),
-    
+    path('reset-booked-rooms/', views.reset_booked_rooms, name='reset_booked_rooms'),
     
     path('bookin/', views.booking_list, name='booking_list'),
 
