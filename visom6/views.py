@@ -1,21 +1,28 @@
 from django.shortcuts import render,HttpResponse,redirect,get_object_or_404
 from django.views import View
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import authenticate, login as auth_login,logout
 from . import views
 from django.contrib import messages
 from .models import Room,Hall,Booking,NewsPost
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.utils.timezone import now
+from django.urls import reverse
 from django.db.models import Sum
+from .models import Room, Hall, Booking 
 # Create your views here.
 
-@login_required
+
 def index(request):
     rooms = Room.objects.all()
     user_id = request.user.id  # Get the logged-in user's ID
     return render(request,"index.html", {'rooms': rooms})
+
+
+def custom_logout_view(request):
+    logout(request)
+    return redirect('/index/')
 
 def room_detail(request, room_id):
     room = get_object_or_404(Room, id=room_id)
@@ -77,7 +84,7 @@ def banquet(request):
         return redirect('booking_success')  # Replace with the actual URL name
 
     return render(request, 'book.html',context)'''
-
+@login_required(login_url='/login/')
 def booking_view(request, room_id=None, hall_id=None):
     if request.method == 'POST':
         room_id = request.POST.get('room_id')
@@ -114,18 +121,19 @@ def booking_view(request, room_id=None, hall_id=None):
         check_out_date = timezone.datetime.strptime(check_out_date, '%Y-%m-%d').date()
 
         # Create the Booking
-        Booking.objects.create(
+        booking = Booking.objects.create(
             customer_name=customer_name,
             room=room,
             hall=hall,
             check_in_date=check_in_date,
             check_out_date=check_out_date,
             guests=int(guests),
-            price=price 
+            price=price, 
+            payment_status='pending'
         )
 
         # Redirect to a success page
-        return redirect('booking_success')
+        return redirect(reverse('payment', args=[booking.id]))
 
     # Handle GET request or form rendering
     room = None
@@ -191,7 +199,7 @@ def register(request):
   else: 
      return render(request,'signup.html',context)
  
- 
+
 def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -369,14 +377,20 @@ def booking_list(request):
 
     rooms = Room.objects.all()
     bookings = Booking.objects.select_related('room')
-    total_rooms = rooms.count()
-    available_rooms = [room for room in rooms if room.available_rooms > 0]
-    booked_rooms = [room for room in rooms if room.booked_rooms > 0]
-
+    total_rooms = sum(room.available_rooms + room.booked_rooms for room in rooms)
+    
+    #available_rooms = [room for room in rooms if room.available_rooms > 0]
+    #booked_rooms = [room for room in rooms if room.booked_rooms > 0]
+    total_available_rooms = sum(room.available_rooms for room in rooms)
+    total_booked_rooms = sum(room.booked_rooms for room in rooms)
+    
     if filter_type == 'available':
-        filtered_rooms = available_rooms
+        filtered_rooms = [room for room in rooms if room.available_rooms > 0]
     elif filter_type == 'booked':
-        filtered_rooms = booked_rooms
+        filtered_rooms = [room for room in rooms if room.booked_rooms > 0]
+        #filtered_rooms = available_rooms
+    #elif filter_type == 'booked':
+        #filtered_rooms = booked_rooms
     else:
         filtered_rooms = rooms
 
@@ -384,9 +398,11 @@ def booking_list(request):
         'rooms': filtered_rooms,
         'total_rooms': total_rooms,
         'bookings': bookings,
-        'available_rooms': len(available_rooms),
-        'booked_rooms': len(booked_rooms),
+        #'available_rooms': len(available_rooms),
+        #'booked_rooms': len(booked_rooms),
         'bookings': bookings,
+        'available_rooms': total_available_rooms,  # Total count of available rooms
+        'booked_rooms': total_booked_rooms,  
     }
     return render(request, 'admin/booking.html',context)
 
@@ -490,3 +506,67 @@ def edit_item(request, item_type, item_id):
         'item_name': item_name
     }
     return render(request, 'admin/editroom.html', context)
+
+
+
+########## PAYMENT ##########
+
+# views.py
+import razorpay
+from django.conf import settings
+from django.shortcuts import render, redirect
+from .models import Booking, Payment
+from django.views.decorators.csrf import csrf_exempt
+
+# Initialize Razorpay client
+razorpay_client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+
+def payment_view(request,booking_id):
+        booking = Booking.objects.get(id=booking_id)
+
+        # Create Razorpay order
+        razorpay_order = razorpay_client.order.create({
+            "amount":  int(booking.price * 100),  # Convert to paise (cents)
+            "currency": "INR",
+            "payment_capture": "1"
+        })
+        
+        # Pass the order_id and other data to the template
+        context = {
+        "razorpay_order_id": razorpay_order['id'],
+        "razorpay_key_id": settings.RAZORPAY_KEY_ID,
+        "amount": booking.price,
+        "booking_id": booking_id,
+        }
+
+        return render(request, 'payment.html',context)
+
+
+@csrf_exempt
+def payment_success(request):
+    if request.method == 'POST':
+        payment_id = request.POST.get('razorpay_payment_id')
+        razorpay_order_id = request.POST.get('razorpay_order_id')
+        signature = request.POST.get('razorpay_signature')
+
+        try:
+            # Verify the payment signature
+            razorpay_client.utility.verify_payment_signature({
+                'razorpay_order_id': razorpay_order_id,
+                'razorpay_payment_id': payment_id,
+                'razorpay_signature': signature
+            })
+
+            # Save the payment to the database
+            Payment.objects.create(
+                razorpay_payment_id=payment_id,
+                razorpay_order_id=razorpay_order_id,
+                amount=request.POST.get('amount'),
+            )
+
+            return render(request, 'payment_success.html')
+
+        except razorpay.errors.SignatureVerificationError:
+            return render(request, 'payment_error.html')
+
+    return redirect('payment_view')

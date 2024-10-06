@@ -38,6 +38,13 @@
   <!-- Nepcha Analytics (nepcha.com) -->
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+  <style>
+    .form-control {
+        background-color: transparent;  /* Change background color */
+        color:#007bff ;  /* Change text color */
+        border: 1px solid white; /* Change border color */
+    }
+</style>
 </head>
 
 <body class="g-sidenav-show dark-version">
@@ -288,6 +295,39 @@
                   <img src="{{ item.image.url }}" alt="{{ item_name }}" width="100">
               {% endif %}
           </div>
+          {% if item_type == 'hall' %}
+          <div class="form-group">
+              <label for="ac">AC</label><br>
+              <input type="radio" id="ac_yes" name="ac" value="Yes" {% if item.ac == "Yes" %}checked{% endif %}>
+              <label for="ac_yes">Yes</label>
+              <input type="radio" id="ac_no" name="ac" value="No" {% if item.ac == "No" %}checked{% endif %}>
+              <label for="ac_no">No</label>
+          </div>
+      
+          <div class="form-group">
+              <label for="stage">Stage</label><br>
+              <input type="radio" id="stage_yes" name="stage" value="Yes" {% if item.stage == "Yes" %}checked{% endif %}>
+              <label for="stage_yes">Yes</label>
+              <input type="radio" id="stage_no" name="stage" value="No" {% if item.stage == "No" %}checked{% endif %}>
+              <label for="stage_no">No</label>
+          </div>
+      
+          <div class="form-group">
+              <label for="surround_system">Surround Sound System</label><br>
+              <input type="radio" id="surround_system_yes" name="surround_system" value="Yes" {% if item.surround_system == "Yes" %}checked{% endif %}>
+              <label for="surround_system_yes">Yes</label>
+              <input type="radio" id="surround_system_no" name="surround_system" value="No" {% if item.surround_system == "No" %}checked{% endif %}>
+              <label for="surround_system_no">No</label>
+          </div>
+      
+          <div class="form-group">
+              <label for="toilets">Toilets</label><br>
+              <input type="radio" id="toilets_yes" name="toilets" value="Yes" {% if item.toilets == "Yes" %}checked{% endif %}>
+              <label for="toilets_yes">Yes</label>
+              <input type="radio" id="toilets_no" name="toilets" value="No" {% if item.toilets == "No" %}checked{% endif %}>
+              <label for="toilets_no">No</label>
+          </div>
+          {% endif %}
           <button type="submit" class="btn btn-primary">Save Changes</button>
       </form>
       <a href="{% url 'roomhall' %}" class="btn btn-secondary">Cancel</a>

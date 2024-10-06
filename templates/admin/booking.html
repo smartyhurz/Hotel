@@ -266,6 +266,8 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Check-out Date</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Guests</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Price</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Payment Status</th>
+                                  <!--  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Payment Mode</th>-->
                                     <th class="text-secondary opacity-7"></th>
                                 </tr>
                             </thead>
@@ -284,6 +286,22 @@
                                     <td>{{ booking.check_out_date }}</td>
                                     <td>{{ booking.guests }}</td>
                                     <td>{{ booking.price }}</td>
+                                    <td>
+                                      {% if booking.payment_status == 'success' %}
+                                          <span class="badge bg-success">Success</span>
+                                      {% else %}
+                                          <span class="badge bg-danger">Failed</span>
+                                      {% endif %}
+                                  </td>
+                                 <!---- <td>
+                                    {% if booking.payment_mode == 'card' %}
+                                        <span class="badge bg-info">Card</span>
+                                    {% elif booking.payment_mode == 'cash' %}
+                                        <span class="badge bg-warning">Cash</span>
+                                    {% elif booking.payment_mode == 'upi' %}
+                                        <span class="badge bg-primary">UPI</span>
+                                    {% endif %}
+                                </td>-->
                                     <td class="align-middle">
                                         <a href="{% url 'booking_update' booking.id %}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit booking">Edit</a>
                                         <a href="{% url 'booking_delete' 'booking' booking.id %}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete booking">Delete</a>
@@ -306,13 +324,14 @@
                   <div class="bg-gradient-white shadow-dark border-radius-lg pt-5 pb-2 d-flex justify-content-between">
                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                       <input type="radio" class="btn-check" name="btnradio" id="allRooms" autocomplete="off" checked>
-                      <label class="btn btn-danger" for="allRooms" onclick="window.location.href='?filter=all'">All Rooms ({{ total_rooms }})</label>
+                      <label class="btn btn-outline-primary" for="allRooms" onclick="window.location.href='?filter=all'">All Rooms ({{ total_rooms }})</label>
                   
                       <input type="radio" class="btn-check" name="btnradio" id="availableRooms" autocomplete="off">
-                      <label class="btn btn-outline-primary" for="availableRooms" onclick="window.location.href='?filter=available'">Available Rooms ({{ available_rooms }})</label>
+                      <label class="btn btn-outline-primary active" for="availableRooms" onclick="window.location.href='?filter=available'">Available Rooms ({{ available_rooms }})</label>
                   
                       <input type="radio" class="btn-check" name="btnradio" id="bookedRooms" autocomplete="off">
-                      <label class="btn btn-outline-primary" for="bookedRooms" onclick="window.location.href='?filter=booked'">Booked Rooms ({{ booked_rooms }})</label>
+                      <label class="btn btn-outline-primary active" for="bookedRooms" onclick="window.location.href='?filter=booked'">Booked Rooms ({{ booked_rooms }})</label>
+                      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                       <form method="post" action="{% url 'reset_booked_rooms' %}">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-danger">Reset Booked Rooms</button>
@@ -349,16 +368,16 @@
                               <td>
                                 {% for booking in bookings %}
                                   {% if booking.room == room %}
-                                    {{ booking.customer_name }}
+                                    {{ booking.customer_name }}<br>
                                  {% endif %}
                                {% endfor %}
                               </td>
                               <td>{{ room.get_room_type_display }}</td>
-                              <td>${{ room.price_per_night }}</td>
-                              <td>{{ room.max_persons }}</td>
-                              <td>{{ room.total_rooms }}</td>
-                              <td>{{ room.booked_rooms }}</td>
-                              <td>{{ room.available_rooms }}</td>
+                              <td>₹{{ room.price_per_night }}</td>
+                              <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ room.max_persons }}</td>
+                              <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ room.total_rooms }}</td>
+                              <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ room.booked_rooms }}</td>
+                              <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ room.available_rooms }}</td>
                             </tr>
                             {% endfor %}
                           </tbody>

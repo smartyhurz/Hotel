@@ -21570,15 +21570,15 @@ fieldset:disabled .btn {
 }
 
 .dark-version .sidenav.bg-transparent .navbar-nav .nav-link {
-  color: #fff !important;
+  color:#1f283e !important;
 }
 
 .dark-version .sidenav.bg-transparent .nav .nav-link {
-  color: #fff !important;
+  color:#1f283e !important;
 }
 
 .dark-version .sidenav.bg-white {
-  background: #fff !important;
+  background:#1f283e !important;
 }
 
 .dark-version .sidenav.bg-white .navbar-nav .nav-link.active:after {
@@ -21595,7 +21595,7 @@ fieldset:disabled .btn {
 }
 
 .dark-version .sidenav .collapse .nav-item .nav-link i {
-  color: #fff !important;
+  color: #1f283e!important;
 }
 
 .dark-version .sidenav.bg-white .collapse .nav-item .nav-link.active.text-dark i,

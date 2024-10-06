@@ -46,6 +46,11 @@ INSTALLED_APPS = [
 
 # settings.py
 
+
+RAZORPAY_KEY_ID = 'your-razorpay-key-id'
+RAZORPAY_KEY_SECRET = 'your-razorpay-secret'
+
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  # For example, using Gmail
 EMAIL_PORT = 587

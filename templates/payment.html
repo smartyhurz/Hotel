@@ -1,0 +1,63 @@
+{% load static %}
+
+
+<!-- payment.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+    <h2>Payment for Booking</h2>
+    <p>Total Amount: ₹{{ amount }}</p>
+    
+    <button id="rzp-button">Pay Now</button>
+
+    <form name="razorpay-form" action="{% url 'payment_success' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="razorpay_payment_id" id="razorpay_payment_id">
+        <input type="hidden" name="razorpay_order_id" id="razorpay_order_id">
+        <input type="hidden" name="razorpay_signature" id="razorpay_signature">
+    </form>
+
+    <script>
+        var options = {
+            "key": "{{ razorpay_key_id }}", // Razorpay API key
+            "amount": "{{ amount|floatformat:2 }} * 100", // Amount in paise
+            "currency": "INR",
+            "name": "Hotel Booking Payment",
+            "description": "Payment for your booking",
+            "order_id": "{{ razorpay_order_id }}", // Order ID from Razorpay
+            "handler": function (response){
+                // After payment is successful, submit the form with payment details
+                document.getElementById('razorpay_payment_id').value = response.razorpay_payment_id;
+                document.getElementById('razorpay_order_id').value = response.razorpay_order_id;
+                document.getElementById('razorpay_signature').value = response.razorpay_signature;
+                document.forms['razorpay-form'].submit();
+            },
+            "prefill": {
+                "name": "{{ request.user.username }}",  // Prefill user's name
+                "email": "{{ request.user.email }}",    // Prefill user's email
+            },
+            "theme": {
+                "color": "#528FF0"  // Custom color for the Razorpay widget
+            }
+        };
+
+        var rzp1 = new Razorpay(options);
+        document.getElementById('rzp-button').onclick = function(e){
+            rzp1.open();
+            e.preventDefault();
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+

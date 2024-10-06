@@ -60,6 +60,12 @@ class Booking(models.Model):
     check_out_date = models.DateField()
     guests = models.IntegerField()
     price = models.DecimalField(max_digits=8, decimal_places=2, editable=False,default=0.00)
+    PAYMENT_STATUS_CHOICES = [
+        ('success', 'Success'),
+        ('pending', 'Pending'),
+        ('failed', 'Failed'),
+    ]
+    payment_status = models.CharField(max_length=10, choices=PAYMENT_STATUS_CHOICES, default='failed')
 
     def clean(self):
         # Ensure check-out date is after check-in date
@@ -85,7 +91,21 @@ class Booking(models.Model):
                 self.room.save()
         elif self.hall:
             self.price = days * self.hall.price_per_night
-
+        
+        
+        # If the payment is marked as successful, update room availability
+        if self.payment_status == 'success':
+            if not self.pk:  # If the booking is new
+                if self.room:
+                    self.room.booked_rooms += 1
+                    self.room.available_rooms -= 1
+                    self.room.save()
+                elif self.hall:
+                    # Handle hall availability similarly, if required
+                    pass
+        elif self.payment_status == 'failed':
+            # No changes to availability on failed payment
+            pass
         super().save(*args, **kwargs)
         
     def delete(self, *args, **kwargs):
@@ -135,3 +155,14 @@ class Profile(models.Model):
     
     def __str__(self):
       return f'{self.user.username} Profile'
+  
+  
+  
+class Payment(models.Model):
+    razorpay_payment_id = models.CharField(max_length=50)
+    razorpay_order_id = models.CharField(max_length=50)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Payment {self.razorpay_payment_id}'  

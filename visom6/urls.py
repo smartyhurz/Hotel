@@ -12,11 +12,12 @@ urlpatterns = [
     path('banquet/',views.banquet),
     path('club/',views.club),
     path('contact/',views.contact),
-    path('login/',views.user_login),
+    path('login/',views.user_login,name='login'),
+    path('logout/',views.custom_logout_view, name='logout'),
     path('news/',views.news_list),
     path('restuarant/',views.rest),  
     path('rooms/',views.rooms,name='rooms'),
-    path('signup/',views.register),
+    path('signup/',views.register,name='signup'),
     path('spa/',views.spa),
     path('check-rooms/', views.check_rooms, name='check_rooms'),
     path('room/<int:room_id>/', views.room_detail, name='room_detail'),
@@ -48,6 +49,10 @@ urlpatterns = [
     
     path('roomhall/',views.rooomhall,name='roomhall'),
     path('edit/<str:item_type>/<int:item_id>/', views.edit_item, name='edit_item'),
+    
+    
+    path('payment/<int:booking_id>/', views.payment_view, name='payment'),
+    path('payment/success/', views.payment_success, name='payment_success'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
